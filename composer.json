@@ -1,5 +1,8 @@
 {
-    "require": {
-        "symfony/flex": "^1.0"
+  "autoload": {
+    "psr-4": {
+      "OrderSystem\\": "src/",
+      "OrderSystem\\Test\\": "test/"
     }
+  }
 }
