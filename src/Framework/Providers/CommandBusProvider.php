@@ -5,7 +5,7 @@ namespace OrderSystem\Framework\Providers;
 use OrderSystem\Framework\CommandBus;
 use Slim\Container;
 
-class CommandBusProvider
+class CommandBusProvider implements ProviderInterface
 {
     public function __invoke(Container $container): Container
     {

@@ -4,11 +4,12 @@ namespace OrderSystem\Framework\Providers;
 
 use Slim\Container;
 
-class Providers
+class Providers implements ProviderInterface
 {
     private $providers = [
         EventBusProvider::class,
-        CommandBusProvider::class
+        CommandBusProvider::class,
+        AdapterProvider::class
     ];
 
     public function __invoke(Container $container): Container
