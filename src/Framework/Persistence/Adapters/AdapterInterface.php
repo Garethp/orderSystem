@@ -8,9 +8,9 @@ interface AdapterInterface
 
     public function getAll(): array;
 
-    public function set(string $id, $value);
+    public function set(string $id, $value): void;
 
     public function has(string $id): bool;
 
-    public function delete(string $id);
+    public function delete(string $id): void;
 }

@@ -21,7 +21,7 @@ class ArrayAdapter implements AdapterInterface
         return array_values($this->array);
     }
 
-    public function set(string $id, $value)
+    public function set(string $id, $value): void
     {
         $this->array[$id] = $value;
     }
@@ -31,7 +31,7 @@ class ArrayAdapter implements AdapterInterface
         return isset($this->array[$id]);
     }
 
-    public function delete(string $id)
+    public function delete(string $id): void
     {
         unset($this->array[$id]);
     }
