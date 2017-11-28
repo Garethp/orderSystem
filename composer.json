@@ -4,5 +4,11 @@
       "OrderSystem\\": "src/",
       "OrderSystem\\Test\\": "test/"
     }
+  },
+  "require": {
+    "roave/security-advisories": "dev-master",
+    "slim/slim": "^3.9",
+    "simple-bus/message-bus": "^3.0",
+    "phpunit/phpunit": "^6.4"
   }
 }
