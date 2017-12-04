@@ -2,13 +2,21 @@
   "autoload": {
     "psr-4": {
       "OrderSystem\\": "src/",
-      "OrderSystem\\Test\\": "test/"
+      "OrderSystem\\Test\\": "tests/"
     }
   },
   "require": {
     "roave/security-advisories": "dev-master",
     "slim/slim": "^3.9",
     "simple-bus/message-bus": "^3.0",
+    "ramsey/uuid": "^3.7"
+  },
+  "require-dev": {
+    "squizlabs/php_codesniffer": "~2.3",
     "phpunit/phpunit": "^6.4"
+  },
+  "scripts": {
+    "cs": "./vendor/bin/phpcs --standard=PSR2 -np src/ tests/",
+    "cbf": "./vendor/bin/phpcbf --standard=PSR2 -np src/ tests/"
   }
 }

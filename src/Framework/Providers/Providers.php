@@ -9,7 +9,11 @@ class Providers implements ProviderInterface
     private $providers = [
         EventBusProvider::class,
         CommandBusProvider::class,
-        AdapterProvider::class
+        AdapterProvider::class,
+        UuidProvider::class,
+        RepositoryProviders::class,
+        PasswordHasherProvider::class,
+        CommandHandlerProviders::class,
     ];
 
     public function __invoke(Container $container): Container

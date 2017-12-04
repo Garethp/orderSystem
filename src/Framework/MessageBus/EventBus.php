@@ -1,6 +1,6 @@
 <?php
 
-namespace OrderSystem\Framework;
+namespace OrderSystem\Framework\MessageBus;
 
 use SimpleBus\Message\Bus\Middleware\FinishesHandlingMessageBeforeHandlingNext;
 use SimpleBus\Message\Bus\Middleware\MessageBusSupportingMiddleware;
@@ -10,7 +10,7 @@ use SimpleBus\Message\Name\ClassBasedNameResolver;
 use SimpleBus\Message\Subscriber\NotifiesMessageSubscribersMiddleware;
 use SimpleBus\Message\Subscriber\Resolver\NameBasedMessageSubscriberResolver;
 
-class EventBus
+class EventBus implements EventBusInterface
 {
     private $eventBus;
 
@@ -19,7 +19,7 @@ class EventBus
         $this->eventBus = $this->getEventBus();
     }
 
-    public function handle($event): void
+    public function fire(EventInterface $event): void
     {
         $this->eventBus->handle($event);
     }
@@ -60,7 +60,6 @@ class EventBus
         $eventHandlers = $this->transformEventHandlers($eventHandlers);
 
         $eventSubscribers = new CallableCollection($eventHandlers, new ServiceLocatorAwareCallableResolver(function () {
-
         }));
 
         $eventNameResolver = new ClassBasedNameResolver();

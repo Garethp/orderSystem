@@ -4,7 +4,7 @@ namespace OrderSystem\Framework\Persistence\Adapters;
 
 class ArrayAdapter implements AdapterInterface
 {
-    private $array = [];
+    private $array;
 
     public function __construct(array $array = [])
     {

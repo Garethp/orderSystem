@@ -2,14 +2,14 @@
 
 namespace OrderSystem\Framework\Providers;
 
-use OrderSystem\Framework\EventBus;
+use OrderSystem\Framework\MessageBus\EventBus;
 use Slim\Container;
 
 class EventBusProvider implements ProviderInterface
 {
     public function __invoke(Container $container): Container
     {
-        $container[EventBus::class] = function() {
+        $container[EventBus::class] = function () {
             return new EventBus();
         };
 
