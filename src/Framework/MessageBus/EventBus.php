@@ -2,6 +2,7 @@
 
 namespace OrderSystem\Framework\MessageBus;
 
+use Slim\Container;
 use SimpleBus\Message\Bus\Middleware\FinishesHandlingMessageBeforeHandlingNext;
 use SimpleBus\Message\Bus\Middleware\MessageBusSupportingMiddleware;
 use SimpleBus\Message\CallableResolver\CallableCollection;
@@ -13,9 +14,11 @@ use SimpleBus\Message\Subscriber\Resolver\NameBasedMessageSubscriberResolver;
 class EventBus implements EventBusInterface
 {
     private $eventBus;
+    private $container;
 
-    public function __construct()
+    public function __construct(Container $container)
     {
+        $this->container = $container;
         $this->eventBus = $this->getEventBus();
     }
 
@@ -37,14 +40,6 @@ class EventBus implements EventBusInterface
                 $handlers = [$handlers];
             }
 
-            foreach ($handlers as $handlerKey => $handler) {
-                if (is_string($handler)) {
-                    $handlers[$handlerKey] = function ($event) use ($handler) {
-                        return (new $handler)($event);
-                    };
-                }
-            }
-
             $eventHandlers[$key] = $handlers;
         }
 
@@ -59,7 +54,10 @@ class EventBus implements EventBusInterface
         $eventHandlers = $this->getEventHandlers();
         $eventHandlers = $this->transformEventHandlers($eventHandlers);
 
-        $eventSubscribers = new CallableCollection($eventHandlers, new ServiceLocatorAwareCallableResolver(function () {
+        $container = $this->container;
+
+        $eventSubscribers = new CallableCollection($eventHandlers, new ServiceLocatorAwareCallableResolver(function ($serviceId) use ($container) {
+            return $container[$serviceId];
         }));
 
         $eventNameResolver = new ClassBasedNameResolver();

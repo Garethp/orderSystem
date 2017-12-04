@@ -14,6 +14,7 @@ class Providers implements ProviderInterface
         RepositoryProviders::class,
         PasswordHasherProvider::class,
         CommandHandlerProviders::class,
+        EventHandlerProviders::class,
     ];
 
     public function __invoke(Container $container): Container

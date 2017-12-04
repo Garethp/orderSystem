@@ -9,8 +9,8 @@ class EventBusProvider implements ProviderInterface
 {
     public function __invoke(Container $container): Container
     {
-        $container[EventBus::class] = function () {
-            return new EventBus();
+        $container[EventBus::class] = function () use ($container) {
+            return new EventBus($container);
         };
 
         return $container;
